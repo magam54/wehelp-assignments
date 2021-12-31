@@ -1,0 +1,82 @@
+
+    .frame{
+        display:flex;
+        font-size:20px;
+    }
+    .left{
+        flex:none;
+    }
+    .right{
+        display:flex;
+        justify-content:flex-end;
+        flex:auto;
+    }
+    .item{
+        display: block;
+        margin-right:10px;
+        text-align: center;
+    }
+    .icon{
+        display: none;
+        width: 30px;
+        height: 30px;
+    }
+    .banner{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        text-align: center;
+        font-size:40px;
+        background-color:skyblue;
+        height:300px;
+    }
+    .Line{
+        display: flex;
+        justify-content: center;
+    }
+    .Line2{
+        display:flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        max-width: 1200px;
+    }
+    .image{
+        display: flex;
+        flex-wrap:wrap;
+        margin-top: 10px;
+        width: 23%;
+    }
+    img{
+        max-width: 100%;
+        max-height: 100%;
+    }
+    .word{
+        background-color: skyblue;
+        width: 100%;
+        text-align: center;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    @media (max-width:1200px){
+        .Line2{
+            width: 90%;
+        }
+        .image{
+            width: 43%;
+        }
+    }
+    @media (max-width:600px){
+        .item{
+            display: none;
+        }
+        .icon{
+            display: block;
+        }
+        .Line2{
+            justify-content: center;
+            width: 90%;
+        }
+        .image{
+            width: 100%;
+        }
+    }
