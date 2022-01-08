@@ -48,7 +48,7 @@ function maxProduct(nums){
             p2 = nums[y]; //取得變數2位置
                 if(p != p2){ //位置不能相同
                     sum = p*p2;
-                    array.unshift(sum);
+                    array.push(sum);
                 }
             }
         }
@@ -67,7 +67,7 @@ function twoSum(nums, target){
             for(var y in nums){ //取出列表中每個位置作為變數2
                 p2=nums[y]; //取得變數2的數字
                 if (x != y && target == p+p2){ //位置不能相同且相加要等於Target
-                    array.push(nums.indexOf(p));  //取得順向順序的值？     
+                    array.push(nums.indexOf(p));  //取得位置    
                 }
             }
         }
@@ -75,6 +75,27 @@ function twoSum(nums, target){
 }
 let result=twoSum([2, 11, 7, 15], 9);
 console.log(result); // show [0, 2] because nums[0]+nums[2] is 9
+
+function maxZeros(nums){
+    var array =[]; //建立空列表，為了取最大值
+    var count =0; //定義變數為0，為出現0的次數
+    for(var x in nums){ //取出每一個數值的位置
+        n1 = nums[x]; //變為數字
+        if (n1 == 0){ //如果取出0
+            count += 1; //次數加1
+            array.push(count); //加入列表中
+        }
+        if (n1 == 1){ //如果取出1
+            count = 0; //次數歸零
+            array.push(count); //加入列表中
+        }
+    }
+    console.log(Math.max(...array))
+ }
+maxZeros([0, 1, 0, 0]); // 得到 2
+maxZeros([1, 0, 0, 0, 0, 1, 0, 1, 0, 0]); // 得到 4 
+maxZeros([1, 1, 1, 1, 1]); // 得到 0 
+maxZeros([0, 0, 0, 1, 1]) // 得到 3
 
 </script>
 </html>

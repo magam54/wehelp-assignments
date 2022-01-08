@@ -45,7 +45,6 @@ def maxProduct(nums):
             else: None
     print(max(li))
 
-# 請用你的程式補完這個函式的區塊
 maxProduct([5, 20, 2, 6]) # 得到 120
 maxProduct([10, -20, 0, 3]) # 得到 30
 maxProduct([-1, 2]) # 得到 -2
@@ -65,28 +64,21 @@ print(result) # show [0, 2] because nums[0]+nums[2] is 9
 
 
 
-# def maxZeros(nums):
-#     li = []
-#     li2 = list()
-#     length = len(nums)
-#     sum = 0
-#     for x in range(len(nums)):
-#         if nums[x] == 1 :
-#             li.append(x)
-#     num1 = int(length)-int(max(li))-int(1)
-#     li2.append(num1)
-#     for y in range(len(li)):
-#         sum = li[y]-li[y-1]-1
-#         if sum > 0 :
-#             li2.append(sum)
-#         elif sum == 0 :
-#             li2.append(min(li))
-#     print(max(li2))
+def maxZeros(nums):
+    li = list() #先建立一個空列表，為了取最大值
+    count = 0  #定義變數為0，為出現0的次數
+    for x in nums:  #取出列表數字
+        if x == 0 :  #如果取出0
+            count += 1  #次數加1
+            li.append(count)  #加入列表中
+        if x == 1 :  #如果取出1
+            count = 0  #次數歸零
+            li.append(count)  #加入列表中
+    print(max(li))
 
 
-# # 請用你的程式補完這個函式的區塊
-# maxZeros([0, 1, 0, 0]) # 得到 2
-# maxZeros([1, 0, 0, 0, 0, 1, 0, 1, 0, 0]) # 得到 4
-# maxZeros([1, 1, 1, 1, 1]) # 得到 0
-# maxZeros([0, 0, 0, 1, 1]) # 得到 3
-# maxZeros([0, 0, 0, 0, 0, 1, 0]) # 得到 4
+# 請用你的程式補完這個函式的區塊
+maxZeros([0, 1, 0, 0]) # 得到 2
+maxZeros([1, 0, 0, 0, 0, 1, 0, 1, 0, 0]) # 得到 4
+maxZeros([1, 1, 1, 1, 1]) # 得到 0
+maxZeros([0, 0, 0, 1, 1]) # 得到 3
