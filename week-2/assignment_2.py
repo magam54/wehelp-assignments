@@ -7,7 +7,6 @@ def calculate(min, max):
 calculate(1, 3) # 你的程式要能夠計算 1+2+3，最後印出 6
 calculate(4, 8) # 你的程式要能夠計算 4+5+6+7+8，最後印出 30
 
-
 def avg(data):
     li = (data["employees"]) #取出employees的列表
     sum = 0
@@ -76,8 +75,6 @@ def maxZeros(nums):
             li.append(count)  #加入列表中
     print(max(li))
 
-
-# 請用你的程式補完這個函式的區塊
 maxZeros([0, 1, 0, 0]) # 得到 2
 maxZeros([1, 0, 0, 0, 0, 1, 0, 1, 0, 0]) # 得到 4
 maxZeros([1, 1, 1, 1, 1]) # 得到 0
