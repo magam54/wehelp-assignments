@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+    <meta charset=“utf-8”>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+<head>
+    <title>Assignment1</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript">
+    let url = "https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment.json";
+    fetch(url).then(function(taipei){
+        return taipei.json();
+    }).then(function(data){
+        let x=0;
+        while(x<8){
+            let title = data.result.results[x].stitle;
+            let image = data.result.results[x].file;
+            let image1 = image.split(/.jpg|.JPG/)[0]+".jpg";
+            x += 1;
+            let mycontainer = document.getElementById("container")
+            let item = document.createElement('div')
+                item.classList.add('image');
+            let imgbox = document.createElement('img');
+                imgbox.src = image1;
+                item.appendChild(imgbox);
+            let titlebox = document.createElement('div');
+                titlebox.classList.add('word');
+                titlebox.textContent=title;
+                item.appendChild(titlebox);
+                mycontainer.appendChild(item);
+                // document.getElementsByClassName('btn').addEventListener("click", function(){
+                //     mycontainer.appendChild(item);})
+        }
+    })
+// function learn(){
+//     fetch(url).then(function(taipei){
+//         return taipei.json();
+//     }).then(function(data){
+//         let y = (data.result.results).length;
+//         let x=8;
+//         let count = 0;
+//         while(x<y && count < 8){
+//             let title = data.result.results[x].stitle;
+//             let image = data.result.results[x].file;
+//             let image1 = image.split(/.jpg|.JPG/)[0]+".jpg";
+//             x += 1;
+//             let mycontainer = document.getElementById("container")
+//             let item = document.createElement('div')
+//                 item.classList.add('image');
+//             let imgbox = document.createElement('img');
+//                 imgbox.src = image1;
+//                 item.appendChild(imgbox);
+//             let titlebox = document.createElement('div');
+//                 titlebox.classList.add('word');
+//                 titlebox.textContent=title;
+//                 item.appendChild(titlebox);
+//                 mycontainer.appendChild(item);
+//                 count +=1;
+//             }
+//         })
+//     }
+
+</script>
+</head>
+<body>
+<div class="frame">
+    <div class="left">my website</div>
+    <div class="right">
+        <div class="icon"><img src="images/navigation_icon.svg"></div>
+        <div class="item">item 1</div>
+        <div class="item">item 2</div>
+        <div class="item">item 3</div>
+        <div class="item">item 4</div>
+    </div>
+</div>
+<div class="banner">
+    <div>Welcome to my home</div>
+</div>
+<div class="Line">
+    <div class="Line2" id="container"></div>
+</div>
+<div class="btn"><button onclick="learn()">Learn more</button><div>
+</body>
