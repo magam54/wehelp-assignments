@@ -1,0 +1,27 @@
+body{
+    margin:0px;
+    font-family: Helvetica;
+}
+header{
+    background-color:#6667AB;
+    text-align: center;
+}
+h1{
+    color: white;
+    margin: 0px;
+    padding: 10px;
+}
+h3{
+    text-align: center;
+}
+.content{
+    text-align: center;
+}
+span{
+    padding: 5px;
+}
+input{
+    padding: 10px;
+    margin: 10px;
+}
+
