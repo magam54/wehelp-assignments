@@ -14,11 +14,13 @@ mydb = mysql.connector.connect(
   password=dbpassword,
   database="website"
 )
+
+
 # 設定Flask
 app=Flask(__name__)
 app.secret_key="thissecretonlyiknow"
 
-# 首頁
+# # 首頁
 @app.route("/")
 def home():
     if "Name" in session :
@@ -32,15 +34,18 @@ def validate():
     accountName=request.form["accountName"]
     passWord=request.form["passWord"]
     mycursor = mydb.cursor()
-    mycursor.execute('select username, password from `member`')
+    sql=('select username, password from `member` where member.username=%s and member.password=%s')
+    values=(accountName,passWord)
+    mycursor.execute(sql,values)
     myresult=mycursor.fetchall()
-    if (accountName,passWord) in myresult:
+    if bool(myresult) == True :
         session["Name"]=accountName
         return redirect("/member")
-    elif (accountName,passWord) not in myresult:
-        return redirect("/error?message=帳號、或密碼輸入錯誤")
     elif accountName == "" or passWord == "":
         return redirect("/error?message=請輸入帳號、密碼")
+    elif bool(myresult) == False :
+        return redirect("/error?message=帳號、或密碼輸入錯誤")
+
 
 # 註冊程序
 @app.route("/signup", methods=["POST"])
@@ -49,18 +54,20 @@ def signup():
     accountName=request.form["accountName"]
     passWord=request.form["passWord"]
     mycursor = mydb.cursor()
-    mycursor.execute('select username from `member`')
+    sql=('select username from `member` where member.username=%s')
+    values=(accountName,)
+    mycursor.execute(sql,values)
     myresult=mycursor.fetchall()
-    if (accountName,) not in myresult and nickName!="" and passWord!="" and accountName!="":
+    if  bool(myresult) == False and nickName !="" and passWord !="" and accountName !="" :
         mycursor = mydb.cursor()
         sql="insert into `member` (name, username, password) values (%s, %s, %s)"
         val=(nickName,accountName,passWord)
         mycursor.execute(sql,val)
         mydb.commit()
         return redirect("/")
-    elif (accountName,) in myresult:
+    if bool(myresult) == True:
         return redirect("/error?message=帳號已經被註冊")
-    else:
+    if bool(myresult) == False and (nickName =="" or passWord =="" or accountName ==""):
         return redirect("/error?message=註冊資料不可留空")
 
 # 會員頁
