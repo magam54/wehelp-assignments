@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+    <meta charset=“utf-8”>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+<head>
+    <title>MemberPage</title>
+    <link rel="stylesheet" href="static/style.css">
+
+</head>
+<body>
+    <header><h1>登入成功</h1></header>
+    <h3>{{ name }},歡迎光臨</h3>
+    <div class="content">
+    <div><a href="/signout">登出</a></div>
+    <h4>查詢會員姓名</h4>
+    <form action="/api/members" method="GET">
+    <input placeholder="請輸入帳號" name="username"><input type="submit" id="searchForm" value="查詢">
+    </form>
+    <div id="result"></div>
+    </div>
+    <script>
+        const SF = document.getElementById("searchForm")
+        SF.addEventListener("click", function(event){
+            event.preventDefault();
+            const myform = new FormData(document.getElementById("TF"));
+            let US = myform.get('username')
+            fetch("http://127.0.0.1:3000/api/members"+"?username="+US)
+            .then(function(data){
+                return data.json();
+            })
+            .then(function(users){
+                let accountName = users.data.username ;
+                let Name = users.data.name ;
+                let container = document.getElementById("result");
+                let vari = Name+"("+accountName+")";
+                container.innerText=vari;
+            })
+            .catch(function(error){
+                let container = document.getElementById("result");
+                let vari = "查無此人";
+                container.innerText=vari;
+            })
+        })
+    </script>
+</body>
+</html>
