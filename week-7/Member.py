@@ -23,25 +23,11 @@ app.secret_key="thissecretonlyiknow"
 @app.route("/api/members")
 def memberSearch():
     name=request.args.get("username")
-    # if name == None:
-    #     mycursor = mydb.cursor()
-    #     mycursor.execute('select id, name, username from `member`')
-    #     myresult=mycursor.fetchall()
-    #     for i in myresult:
-    #         i=0
-    #         item = {"id":"%s","name":"%s","username":"%s"}
-    #         item["id"]=(myresult[i][0])
-    #         item["name"]=myresult[i][1]
-    #         item["username"]=myresult[i][2]
-    #         i=i+1
-    #         print(item)
-    #     return {"data":item}
-    if name != None:
-        mycursor = mydb.cursor()
-        sql=('select id, name, username from `member` where member.username=%s')
-        values=(name,)
-        mycursor.execute(sql,values)
-        myresult=mycursor.fetchone()
+    mycursor = mydb.cursor()
+    sql=('select id, name, username from `member` where member.username=%s')
+    values=(name,)
+    mycursor.execute(sql,values)
+    myresult=mycursor.fetchone()
     if myresult==None:
         item = None
     else:
