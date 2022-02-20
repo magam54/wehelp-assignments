@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, session, render_template
+from flask import Flask, request, redirect, session, render_template, jsonify
 import mysql.connector
 import os
 from dotenv import load_dotenv
@@ -20,6 +20,7 @@ mydb = mysql.connector.connect(
 app=Flask(__name__)
 app.secret_key="thissecretonlyiknow"
 
+# 查找姓名
 @app.route("/api/members")
 def memberSearch():
     name=request.args.get("username")
@@ -33,6 +34,21 @@ def memberSearch():
     else:
         item = {"id":myresult[0],"name":myresult[1],"username":myresult[2]}
     return {"data":item}
+
+# 更新姓名
+@app.route("/api/member", methods=["POST"])
+def updateName():
+    if "Name" in session :
+        data=request.get_json()
+        newName=data["name"]
+        mycursor = mydb.cursor()
+        sql=('update `member` set name=%s where member.username=%s')
+        values=(newName,session["Name"])
+        mycursor.execute(sql,values)
+        mydb.commit()
+        return jsonify(ok=True)
+    else:
+        return jsonify(error=True)
 
 # 首頁
 @app.route("/")

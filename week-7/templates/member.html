@@ -17,8 +17,14 @@
     <input placeholder="請輸入帳號" name="username"><input type="submit" id="searchForm" value="查詢">
     </form>
     <div id="result"></div>
+    <h4>更新我的姓名</h4>
+    <form action="/api/member" id="TF2" method="POST">
+    <input placeholder="請輸入新的姓名" name="name"><input type="submit" id="updateForm" value="更新">
+    </form>
+    <div id="result_name"></div>
     </div>
     <script>
+        // 查找程序
         const SF = document.getElementById("searchForm")
         SF.addEventListener("click", function(event){
             event.preventDefault();
@@ -39,6 +45,39 @@
                 let container = document.getElementById("result");
                 let vari = "查無此人";
                 container.innerText=vari;
+            })
+        })
+        // 更新程序
+        const UF = document.getElementById("updateForm")
+        UF.addEventListener("click", function(event){
+            event.preventDefault();
+            const myform = new FormData(document.getElementById("TF2"));
+            let result={};
+            for (pairs of myform.entries()){
+                result[pairs[0]]=pairs[1];
+            }
+            fetch("http://127.0.0.1:3000/api/member",{
+                method:"POST",
+                body:(JSON.stringify(result)),
+                headers:{
+                'content-type':'application/json'}
+            })
+            .then(function(data){
+                return data.json();
+            })
+            .then(function(users){
+                if(users.ok==true){
+                    let container = document.getElementById("result_name");
+                    container.innerText="更新成功";
+                }
+                if(users.error==true){
+                    let container = document.getElementById("result_name");
+                    container.innerText="更新失敗";
+                }
+            })
+            .catch(function(error){
+                let container = document.getElementById("result_name");
+                container.innerText="更新失敗";
             })
         })
     </script>
